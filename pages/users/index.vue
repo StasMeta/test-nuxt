@@ -3,13 +3,17 @@
     <h1>{{ pageTitle }}</h1>
     <ul>
       <li v-for="user of users" :key="user.id">
-        <a href="#" @click.prevent="openUser(user)">{{ user.name }}</a>
+        <nuxt-link :to="`/users/${user.id}/`" @click.prevent="openUser(user)">{{
+          user.name
+        }}</nuxt-link>
       </li>
     </ul>
   </section>
 </template>
 <script>
 export default {
+  name: "UsersList",
+  middleware: ["auth"],
   async fetch({ store }) {
     if (store.getters["users/users"].length === 0) {
       await store.dispatch("users/fetch");
@@ -25,7 +29,7 @@ export default {
   },
   methods: {
     openUser(user) {
-      this.$router.push("/users/" + user.id);
+      this.$router.push(`/users/${user.id}/`);
     },
   },
 };

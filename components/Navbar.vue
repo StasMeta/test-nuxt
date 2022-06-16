@@ -28,18 +28,18 @@
             </nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link active-class="active" class="nav-link" to="/about">
-              Link 1
-            </nuxt-link>
-          </li>
-          <li class="nav-item">
             <nuxt-link active-class="active" class="nav-link" to="/users">
-              Link 2
+              Users
             </nuxt-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="!hasToken">
             <nuxt-link active-class="active" class="nav-link" to="/login">
               Login
+            </nuxt-link>
+          </li>
+          <li class="nav-item" v-else>
+            <nuxt-link @click.prevent="logout" class="nav-link" to="/login">
+              Logout
             </nuxt-link>
           </li>
         </ul>
@@ -47,3 +47,22 @@
     </nav>
   </div>
 </template>
+<script>
+export default {
+  name: "Navbar",
+  data() {
+    return {};
+  },
+  computed: {
+    hasToken() {
+      return this.$store.getters.hasToken;
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/login");
+    },
+  },
+};
+</script>

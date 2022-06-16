@@ -41,11 +41,6 @@ export default {
     );
     return { user };
   },
-  // computed: {
-  //   id() {
-  //     return this.$route.params.id;
-  //   },
-  // },
   data() {
     return {
       isElVisible: false,

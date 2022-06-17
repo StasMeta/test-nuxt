@@ -9,7 +9,7 @@ export const mutations = {
 };
 
 export const actions = {
-  async fetch({ commit }) {
+  async getAllUsers({ commit }) {
     const users = await this.$axios.$get(
       "https://jsonplaceholder.typicode.com/users/"
     );
@@ -19,4 +19,7 @@ export const actions = {
 
 export const getters = {
   users: (s) => s.users,
+  getUserById: (state) => (id) => {
+    return state.users.find((u) => u.id == id);
+  },
 };

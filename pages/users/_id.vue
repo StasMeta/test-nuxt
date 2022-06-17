@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="user">
     <h1>{{ user.name }}</h1>
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item">
@@ -33,25 +33,25 @@
   </section>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "UserDate",
-  async asyncData({ $axios, params }) {
-    const user = await $axios.$get(
-      `https://jsonplaceholder.typicode.com/users/${params.id}`
-    );
-    return { user };
-  },
   data() {
     return {
       isElVisible: false,
       textBtn: "Редактировать",
       textLink: "Home Page",
+      user: null,
     };
   },
   methods: {
     toggleElement() {
       this.isElVisible = !this.isElVisible;
     },
+  },
+  mounted() {
+    // console.log(this.$route.params.id);
+    this.user = this.$store.getters["users/getUserById"](this.$route.params.id);
   },
 };
 </script>

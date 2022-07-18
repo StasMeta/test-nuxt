@@ -4,23 +4,48 @@
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item">
         <span class="text-success">Email:</span> {{ user.email }}
-        <input type="text" v-model="user.email" v-show="isElVisible" />
+        <input
+          type="text"
+          :value="user.email"
+          @input="changeEmail"
+          v-show="isElVisible"
+        />
       </li>
       <li class="list-group-item">
         <span class="text-success">City:</span> {{ user.address.city }}
-        <input type="text" v-model="user.address.city" v-show="isElVisible" />
+        <input
+          type="text"
+          :value="user.address.city"
+          @input="changeCity"
+          v-show="isElVisible"
+        />
       </li>
       <li class="list-group-item">
         <span class="text-success">Street:</span> {{ user.address.street }}
-        <input type="text" v-model="user.address.street" v-show="isElVisible" />
+        <input
+          type="text"
+          :value="user.address.street"
+          @input="changeStreet"
+          v-show="isElVisible"
+        />
       </li>
       <li class="list-group-item">
         <span class="text-success">Phone:</span> {{ user.phone }}
-        <input type="text" v-model="user.phone" v-show="isElVisible" />
+        <input
+          type="text"
+          :value="user.phone"
+          @input="changePhone"
+          v-show="isElVisible"
+        />
       </li>
       <li class="list-group-item">
         <span class="text-success">Website:</span> {{ user.website }}
-        <input type="text" v-model="user.website" v-show="isElVisible" />
+        <input
+          type="text"
+          :value="user.website"
+          @input="changeWebsite"
+          v-show="isElVisible"
+        />
       </li>
     </ul>
 
@@ -33,7 +58,6 @@
   </section>
 </template>
 <script>
-import { mapGetters } from "vuex";
 export default {
   name: "UserDate",
   data() {
@@ -47,6 +71,36 @@ export default {
   methods: {
     toggleElement() {
       this.isElVisible = !this.isElVisible;
+    },
+    changeEmail(e) {
+      this.$store.commit("users/changeUserEmail", {
+        id: this.$route.params.id,
+        email: e.target.value,
+      });
+    },
+    changePhone(e) {
+      this.$store.commit("users/changeUserPhone", {
+        id: this.$route.params.id,
+        phone: e.target.value,
+      });
+    },
+    changeCity(e) {
+      this.$store.commit("users/changeUserCity", {
+        id: this.$route.params.id,
+        city: e.target.value,
+      });
+    },
+    changeStreet(e) {
+      this.$store.commit("users/changeUserStreet", {
+        id: this.$route.params.id,
+        street: e.target.value,
+      });
+    },
+    changeWebsite(e) {
+      this.$store.commit("users/changeUserWebsite", {
+        id: this.$route.params.id,
+        website: e.target.value,
+      });
     },
   },
   mounted() {

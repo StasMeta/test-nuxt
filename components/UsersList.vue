@@ -8,6 +8,7 @@
   </ul>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "UsersList",
   async fetch({ store }) {
@@ -15,10 +16,9 @@ export default {
       await store.dispatch("users/fetch");
     }
   },
+
   computed: {
-    users() {
-      return this.$store.getters["users/users"];
-    },
+    ...mapGetters({ users: "users/users" }),
   },
   methods: {
     openUser(user) {

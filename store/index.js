@@ -12,7 +12,7 @@ export const mutations = {
 };
 
 export const actions = {
-  async nuxtServerInit({ commit, dispatch }, { req }) {
+  async nuxtServerInit({ dispatch }) {
     await dispatch("users/getAllUsers");
   },
   login({ commit }) {

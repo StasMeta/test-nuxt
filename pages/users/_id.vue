@@ -104,7 +104,6 @@ export default {
     },
   },
   mounted() {
-    // console.log(this.$route.params.id);
     this.user = this.$store.getters["users/getUserById"](this.$route.params.id);
   },
 };
